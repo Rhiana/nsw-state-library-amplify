@@ -6,18 +6,56 @@ namespace :voice_base do
   end
 
   # Usage: rake voice_base:upload['oral-history']
-  desc "Upload the unprocessed audio to Pop Up Archive"
+  desc "Upload the unprocessed audio to VoiceBase"
   task :upload, [:project_key] => :environment do |task, args|
 
-    # Retrieve transcripts that have Pop Up Archive as its vendor and are empty
+    # Retrieve transcripts that have VoiceBase as its vendor and are empty
     transcripts = Transcript.getForUploadByVendor('voice_base', args[:project_key])
-    puts "Retrieved #{transcripts.length} transcripts from collections with Pop Up Archive as its vendor that are empty"
+    puts "Retrieved #{transcripts.length} transcripts from collections with VoiceBase as its vendor that are empty"
 
-    # Init a Pop Up Archive client
+    # Init a VoiceBase client
     voice_base_client = VoiceBase::Upload.new
 
     transcripts.find_each do |transcript|
       item = voice_base_client.createItem(transcript)
     end
+  end
+
+  # Usage: rake pua:download['oral-history']
+  desc "Download new transcripts from VoiceBase"
+  task :download, [:project_key] => :environment do |task, args|
+
+    # Retrieve transcripts that have VoiceBase as its vendor and are empty
+    transcripts = Transcript.getForDownloadByVendor('voice_base', args[:project_key])
+    puts "Retrieved #{transcripts.length} transcripts from collections with VoiceBase as its vendor that are empty"
+
+    # Init a VoiceBase client
+    voice_base_client = VoiceBase::Upload.new
+
+    transcripts.find_each do |transcript|
+
+      # Check if transcript already exists in project directory
+      transcript_file = Rails.root.join('project', args[:project_key], 'transcripts', 'voice_base', "#{transcript[:vendor_identifier]}.json")
+      contents = ""
+      if File.exist? transcript_file
+        puts "Found transcript in project folder: #{transcript_file}"
+        file = File.read(transcript_file)
+        contents = JSON.parse(file)
+
+      # Otherwise retrieve it fresh from VoiceBase
+      else
+        contents = voice_base_client.getItem(transcript)
+        puts "Retrieved #{contents["id"]} from VoiceBase"
+      end
+
+      # Parse the contents
+      if contents.empty?
+        puts "Warning: contents of #{contents["id"]} is empty"
+      else
+        transcript.loadFromHash(contents)
+      end
+
+    end
+
   end
 end

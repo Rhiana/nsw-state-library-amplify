@@ -13,12 +13,23 @@ module VoiceBase
     def createItem(transcript)
       success = _createSingleItem(transcript[:audio_url])
       if success
-        transcript_status = TranscriptStatus.find_by_name("audio_uploaded")
-        transcript.update(transcript_status_id: transcript_status[:id])
+        _updateStatus(transcript, "audio_uploaded")
       end
     end
 
+    def getItem(transcript)
+      result = _getTranscript(transcript[:vendor_identifier])
+      # @TODO: Any conversion between VoiceBase's response JSON and PUA's.
+      result
+    end
+
     private
+
+    # Update status for a transcript.
+    def _updateStatus(transcript, status_name)
+      transcript_status = TranscriptStatus.find_by_name(status_name)
+      transcript.update(transcript_status_id: transcript_status[:id])
+    end
 
     # Create a single transcript for a given audio URL.
     def _createSingleItem(audio_url)
@@ -45,9 +56,7 @@ module VoiceBase
     end
 
     def _createSingleItemCheck(media_id)
-      result = @client.get_transcript({
-        media_id: media_id
-      }, {'Accept' => 'text/srt'})
+      result = _getTranscript(media_id)
       if result.success?
         @uploading = false
         true
@@ -56,6 +65,12 @@ module VoiceBase
         sleep(1)
         false
       end
+    end
+
+    def _getTranscript(media_id)
+      @client.get_transcript({
+        media_id: media_id
+      }, {'Accept' => 'text/srt'})
     end
 
     def _getClient()
