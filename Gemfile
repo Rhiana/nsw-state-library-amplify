@@ -39,6 +39,7 @@ gem 'execjs'
 # For audio transcripts
 gem 'popuparchive'
 gem 'webvtt-ruby'
+gem 'voicebase-client-ruby'
 
 # Error logging
 gem 'newrelic_rpm'

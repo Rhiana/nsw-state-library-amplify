@@ -4,4 +4,20 @@ namespace :voice_base do
   task :import_transcripts, [:project_key] => :environment do |task, args|
     VoiceBase::ImportSrtTranscripts.call(project_id: args[:project_key])
   end
+
+  # Usage: rake voice_base:upload['oral-history']
+  desc "Upload the unprocessed audio to Pop Up Archive"
+  task :upload, [:project_key] => :environment do |task, args|
+
+    # Retrieve transcripts that have Pop Up Archive as its vendor and are empty
+    transcripts = Transcript.getForUploadByVendor('voice_base', args[:project_key])
+    puts "Retrieved #{transcripts.length} transcripts from collections with Pop Up Archive as its vendor that are empty"
+
+    # Init a Pop Up Archive client
+    voice_base_client = VoiceBase::Upload.new
+
+    transcripts.find_each do |transcript|
+      item = voice_base_client.createItem(transcript)
+    end
+  end
 end

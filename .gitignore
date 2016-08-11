@@ -25,6 +25,7 @@
 
 # Ignore application configuration
 /config/application.yml
+/config/application.yaml
 /config/database.yml
 /config/application.*.yml
 !/config/application.sample.yml
@@ -41,3 +42,6 @@
 
 /project/nsw-state-library-amplify/assets/img/Landing page/
 /public/nsw-state-library-amplify/assets/img/Landing page/
+
+# Remove any database dumps, they shouldn't even be in here.
+/*.sql
