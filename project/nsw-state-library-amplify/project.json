@@ -21,6 +21,11 @@
       "name": "facebook",
       "label": "Facebook",
       "path": "/auth/facebook"
+    },
+    {
+      "name": "gigya",
+      "label": "Gigya",
+      "path": "/auth/gigya"
     }
   ],
   "consensus": {
