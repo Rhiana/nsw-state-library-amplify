@@ -7,8 +7,9 @@ GIT
       rest-client (~> 1.7)
 
 GIT
-  remote: git://github.com/callawaywilson/omniauth-gigya.git
-  revision: e1d55decb6abdff577634b6b0f3debdbba73c316
+  remote: git://github.com/rtrvrtg/omniauth-gigya.git
+  revision: 8a3a87c19ce7567405fc364cd97c9f5204b5e9b0
+  branch: feature/request-phase
   specs:
     omniauth-gigya (0.0.3)
       gigya_api (~> 0.0.2)
@@ -104,7 +105,7 @@ GEM
       thor (~> 0.14)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
-    hashie (3.4.3)
+    hashie (3.5.5)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -118,10 +119,10 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mime-types (2.99)
+    mime-types (2.99.3)
     mini_portile2 (2.0.0)
     minitest (5.8.3)
-    multi_json (1.11.2)
+    multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     net-scp (1.2.1)
@@ -137,9 +138,9 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (~> 1.2)
-    omniauth (1.3.1)
-      hashie (>= 1.2, < 4)
-      rack (>= 1.0, < 3)
+    omniauth (1.6.1)
+      hashie (>= 3.4.6, < 3.6.0)
+      rack (>= 1.6.2, < 3)
     omniauth-facebook (3.0.0)
       omniauth-oauth2 (~> 1.2)
     omniauth-google-oauth2 (0.3.0)
@@ -165,7 +166,7 @@ GEM
       oauth2
       xml-simple
     puma (3.4.0)
-    rack (1.6.4)
+    rack (1.6.7)
     rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
