@@ -31,6 +31,8 @@ gem 'figaro'
 gem 'devise_token_auth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem 'gigya_api', github: 'callawaywilson/gigya_api'
+gem 'omniauth-gigya', github: 'callawaywilson/omniauth-gigya'
 
 # Parsers for project asset precompilation
 gem 'redcarpet'

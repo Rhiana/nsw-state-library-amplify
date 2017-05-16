@@ -1,3 +1,19 @@
+GIT
+  remote: git://github.com/callawaywilson/gigya_api.git
+  revision: 0c62ad9875f29cb46660820c091bd54443bf7d85
+  specs:
+    gigya_api (0.0.3)
+      multi_json (~> 1.0)
+      rest-client (~> 1.7)
+
+GIT
+  remote: git://github.com/callawaywilson/omniauth-gigya.git
+  revision: e1d55decb6abdff577634b6b0f3debdbba73c316
+  specs:
+    omniauth-gigya (0.0.3)
+      gigya_api (~> 0.0.2)
+      omniauth (~> 1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -74,6 +90,8 @@ GEM
       devise (~> 3.5.2)
       rails (~> 4.2)
     diff-lcs (1.2.5)
+    domain_name (0.5.20170404)
+      unf (>= 0.0.5, < 1.0.0)
     ejs (1.1.1)
     erubis (2.7.0)
     excon (0.45.4)
@@ -87,6 +105,8 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.3)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
     i18n (0.7.0)
     jbuilder (2.4.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -107,6 +127,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.1.1)
+    netrc (0.11.0)
     newrelic_rpm (3.15.1.316)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
@@ -185,6 +206,10 @@ GEM
     redcarpet (3.3.4)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec-core (3.4.4)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -216,6 +241,9 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.4)
     unicorn (5.0.1)
       kgio (~> 2.6)
       rack
@@ -240,9 +268,11 @@ DEPENDENCIES
   ejs
   execjs
   figaro
+  gigya_api!
   jbuilder (~> 2.0)
   newrelic_rpm
   omniauth-facebook
+  omniauth-gigya!
   omniauth-google-oauth2
   pg
   pg_search
@@ -259,4 +289,4 @@ DEPENDENCIES
   will_paginate
 
 BUNDLED WITH
-   1.12.4
+   1.12.5
