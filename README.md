@@ -81,10 +81,11 @@ The primary place for project configuration the file `project.json`. For now, we
 
 ### Setup and run the app
 
-1. Run `bundle` - this will install all the necessary gems for this app
-2. Run `rake db:setup` to setup the database based on `config/database.yml`
-3. Run `rake project:load['my-project']` to load your project folder (replace *my-project* with your project name)
-4. Run `rails s` to start your server. Go to [http://localhost:3000/](http://localhost:3000/) to view your project
+1. Run `bundle` - this will install all the necessary gems for this app.
+2. Run `rake db:setup` to setup the database based on `config/database.yml`.
+3. Run `rake project:load['my-project']` to load your project folder (replace *my-project* with your project name).
+4. Run `rake cache:clear` to clear your cache if you've used Amplify previously.
+5. Run `rails s` to start your server. Go to [http://localhost:3000/](http://localhost:3000/) to view your project.
 
 Your project should load, but since there's no transcripts, all you'll see is a header and blank screen! The next step is to seed the app with some transcripts
 
@@ -160,10 +161,11 @@ If you already have a vendor that generates transcripts or you have created your
 
 All project customization should happen within your project directory (e.g. `/project/my-project/`). Changes made anywhere else may result in code conflicts when updating your app with new code.
 
-Whenever you make a change to your project directory, you must run the following rake task to see it in the app:
+Whenever you make a change to your project directory, you must run the following rake tasks to see it in the app:
 
 ```
 rake project:load['my-project']
+rake cache:clear
 ```
 
 ### Activating user accounts
@@ -573,6 +575,7 @@ bundle exec rake collections:load['nsw-state-library-amplify','collections_seeds
 bundle exec rake transcripts:load['nsw-state-library-amplify','transcripts_seeds.csv']
 bundle exec rake speakers:load['nsw-state-library-amplify','speakers_seeds.csv']
 bundle exec rake voice_base:import_transcripts['nsw-state-library-amplify']
+bundle exec rake cache:clear
 ```
 
 #### Importing transcript lines
